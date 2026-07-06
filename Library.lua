@@ -224,7 +224,7 @@ local Library = {
 	Scheme = {
 		BackgroundColor = Color3.fromRGB(0, 0, 0),
 		MainColor = Color3.fromRGB(15, 15, 15),
-		AccentColor = Color3.fromRGB(1, 1, 1),
+		AccentColor = Color3.fromRGB(255, 255, 255),
 		OutlineColor = Color3.fromRGB(40, 40, 40),
 		FontColor = Color3.new(1, 1, 1),
 		Font = Font.fromEnum(Enum.Font.Code),
@@ -7724,7 +7724,7 @@ function Library:Notify(...)
 				BackgroundTransparency = 1,
 				AnchorPoint = Vector2.new(0, 0.5),
 				Position = UDim2.new(0, 0, 0.5, 1),
-				Size = UDim2.fromOffset(15, 15),
+				Size = UDim2.fromOffset(10, 10),
 				Image = ParsedIcon.Url,
 				ImageColor3 = Data.IconColor or "FontColor",
 				ImageRectOffset = ParsedIcon.ImageRectOffset,
