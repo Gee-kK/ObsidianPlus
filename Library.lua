@@ -10637,7 +10637,7 @@ function Library:CreateKeyWindow(WindowInfo)
 	local BottomBackground
 	local FooterLabel
 
-	local InitialLeftWidth = math.ceil(WindowInfo.Size.X)
+	local InitialLeftWidth = math.ceil(WindowInfo.Size.X.Offset)
 	local IsCompact = WindowInfo.SidebarCompacted
 	local LastExpandedWidth = InitialLeftWidth
 
