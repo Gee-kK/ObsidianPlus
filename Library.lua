@@ -360,12 +360,12 @@ local Templates = {
 		Footer = "No Footer",
 
 		Position = UDim2.fromOffset(6, 6),
-		Size = UDim2.fromOffset(720, 600),
-		IconSize = UDim2.fromOffset(30, 30),
+		Size = UDim2.fromOffset(720, 400),
+		IconSize = UDim2.fromOffset(90, 20),
 
 		AutoShow = true,
 		Center = true,
-		Resizable = true,
+		Resizable = false,
 
 		SearchbarSize = UDim2.fromScale(1, 1),
 		GlobalSearch = false,
@@ -11690,12 +11690,12 @@ function Library:CreateKeyWindow(WindowInfo)
 			Size = UDim2.new(1, 0, 0, 1),
 		})
 
-		DividerLine = New("Frame", {
-			BackgroundColor3 = "OutlineColor",
-			Position = UDim2.fromOffset(InitialLeftWidth, 0),
-			Size = UDim2.new(0, 1, 1, -21),
-			Parent = MainFrame,
-		})
+		--DividerLine = New("Frame", {
+		--	BackgroundColor3 = "OutlineColor",
+		--	Position = UDim2.fromOffset(InitialLeftWidth, 0),
+		--	Size = UDim2.new(0, 1, 1, -21),
+		--	Parent = MainFrame,
+		--})
 
 		local BackgroundIcon = Library:GetCustomIcon(WindowInfo.BackgroundImage)
 		BackgroundImage = New("ImageLabel", {
@@ -11746,25 +11746,25 @@ function Library:CreateKeyWindow(WindowInfo)
 			Parent = TitleHolder,
 		})
 
-		if WindowInfo.Icon then
-			local Icon = Library:GetCustomIcon(WindowInfo.Icon)
-			WindowIcon = New("ImageLabel", {
-				Image = Icon.Url,
-				ImageRectOffset = Icon.ImageRectOffset,
-				ImageRectSize = Icon.ImageRectSize,
-				Size = WindowInfo.IconSize,
-				Parent = TitleHolder,
-			})
-		else
-			WindowIcon = New("TextLabel", {
-				BackgroundTransparency = 1,
-				Size = WindowInfo.IconSize,
-				Text = WindowInfo.Title:sub(1, 1),
-				TextScaled = true,
-				Visible = false,
-				Parent = TitleHolder,
-			})
-		end
+		--if WindowInfo.Icon then
+		--	local Icon = Library:GetCustomIcon(WindowInfo.Icon)
+		--	WindowIcon = New("ImageLabel", {
+		--		Image = Icon.Url,
+		--		ImageRectOffset = Icon.ImageRectOffset,
+		--		ImageRectSize = Icon.ImageRectSize,
+		--		Size = WindowInfo.IconSize,
+		--		Parent = TitleHolder,
+		--	})
+		--else
+		--	WindowIcon = New("TextLabel", {
+		--		BackgroundTransparency = 1,
+		--		Size = WindowInfo.IconSize,
+		--		Text = WindowInfo.Title,
+		--		TextScaled = true,
+		--		Visible = false,
+		--		Parent = TitleHolder,
+		--	})
+		--end
 
 		local X = Library:GetTextBounds(
 			WindowInfo.Title,
@@ -11772,13 +11772,13 @@ function Library:CreateKeyWindow(WindowInfo)
 			20,
 			TitleHolder.AbsoluteSize.X - (WindowInfo.Icon and WindowInfo.IconSize.X.Offset + 6 or 0) - 12
 		)
-		WindowTitle = New("TextLabel", {
-			BackgroundTransparency = 1,
-			Size = UDim2.new(0, X, 1, 0),
-			Text = WindowInfo.Title,
-			TextSize = 20,
-			Parent = TitleHolder,
-		})
+		--WindowTitle = New("TextLabel", {
+		--	BackgroundTransparency = 1,
+		--	Size = UDim2.new(0, X, 1, 0),
+		--	Text = WindowInfo.Title,
+		--	TextSize = 20,
+		--	Parent = TitleHolder,
+		--})
 
 		--// Top Right Bar \\--
 		RightWrapper = New("Frame", {
@@ -11823,6 +11823,34 @@ function Library:CreateKeyWindow(WindowInfo)
 			PaddingTop = UDim.new(0, 8),
 			Parent = CurrentTabInfo,
 		})
+		
+		if WindowInfo.Icon then
+			local Icon = Library:GetCustomIcon(WindowInfo.Icon)
+			WindowIcon = New("ImageLabel", {
+				Image = Icon.Url,
+				ImageRectOffset = Icon.ImageRectOffset,
+				ImageRectSize = Icon.ImageRectSize,
+				Size = WindowInfo.IconSize,
+				Parent = RightWrapper,
+			})
+		else
+			WindowIcon = New("TextLabel", {
+				BackgroundTransparency = 1,
+				Size = WindowInfo.IconSize,
+				Text = WindowInfo.Title,
+				TextScaled = true,
+				Visible = false,
+				Parent = RightWrapper,
+			})
+		end
+		
+		WindowTitle = New("TextLabel", {
+			BackgroundTransparency = 1,
+			Size = UDim2.new(0, X, 1, 0),
+			Text = WindowInfo.Title,
+			TextSize = 18,
+			Parent = RightWrapper,
+		})
 
 		CurrentTabLabel = New("TextLabel", {
 			BackgroundTransparency = 1,
@@ -11851,7 +11879,7 @@ function Library:CreateKeyWindow(WindowInfo)
 			PlaceholderText = "Search",
 			Size = WindowInfo.SearchbarSize,
 			TextScaled = true,
-			Visible = not (WindowInfo.DisableSearch or false),
+			Visible = false,
 			Parent = RightWrapper,
 		})
 		New("UIFlexItem", {
@@ -11899,7 +11927,7 @@ function Library:CreateKeyWindow(WindowInfo)
 				ImageRectOffset = MoveIcon.ImageRectOffset,
 				ImageRectSize = MoveIcon.ImageRectSize,
 				Position = UDim2.new(1, -10, 0.5, 0),
-				Size = UDim2.fromOffset(28, 28),
+				Size = UDim2.fromOffset(20, 20),
 				SizeConstraint = Enum.SizeConstraint.RelativeYY,
 				Parent = TopBar,
 			})
@@ -11978,6 +12006,7 @@ function Library:CreateKeyWindow(WindowInfo)
 
 		--// Tabs \\--
 		Tabs = New("ScrollingFrame", {
+			Visible = false,
 			AutomaticCanvasSize = Enum.AutomaticSize.Y,
 			BackgroundColor3 = "BackgroundColor",
 			CanvasSize = UDim2.fromScale(0, 0),
@@ -12133,9 +12162,9 @@ function Library:CreateKeyWindow(WindowInfo)
 	end
 
 	function Window:SetSidebarWidth(Width)
-		Width = math.clamp(Width, 48, MainFrame.Size.X.Offset - WindowInfo.MinContainerWidth - 1)
+		Width = 0
 
-		DividerLine.Position = UDim2.fromOffset(Width, 0)
+		--DividerLine.Position = UDim2.fromOffset(Width, 0)
 
 		TitleHolder.Size = UDim2.new(0, Width, 1, 0)
 		RightWrapper.Size = UDim2.new(1, -Width - 57 - 1, 1, -16)
@@ -13303,7 +13332,7 @@ function Library:CreateKeyWindow(WindowInfo)
 				CanvasSize = UDim2.fromScale(0, 0),
 				ScrollBarImageTransparency = 1,
 				ScrollBarThickness = 0,
-				Size = UDim2.new(1, -3, 1, 0),
+				Size = UDim2.new(1, 0, 1, 0),
 				Parent = TabContainer,
 			})
 			New("UIListLayout", {
@@ -13516,7 +13545,7 @@ function Library:CreateKeyWindow(WindowInfo)
 			local Offset = WarningBoxHolder.Visible and WarningBox.Size.Y.Offset + 8 or 0
 			for _, Side in Tab.Sides do
 				Side.Position = UDim2.new(Side.Position.X.Scale, 0, 0, Offset)
-				Side.Size = UDim2.new(0.5, -3, 1, -Offset)
+				Side.Size = UDim2.new(1, 0, 1, -Offset)
 			end
 		end
 
