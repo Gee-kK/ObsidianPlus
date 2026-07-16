@@ -224,7 +224,7 @@ local Library = {
 	Scheme = {
 		BackgroundColor = Color3.fromRGB(0, 0, 0),
 		MainColor = Color3.fromRGB(15, 15, 15),
-		AccentColor = Color3.fromRGB(255, 255, 255),
+		AccentColor = Color3.fromRGB(143, 143, 143),
 		OutlineColor = Color3.fromRGB(40, 40, 40),
 		FontColor = Color3.new(1, 1, 1),
 		Font = Font.fromEnum(Enum.Font.Code),
@@ -360,7 +360,7 @@ local Templates = {
 		Footer = "No Footer",
 
 		Position = UDim2.fromOffset(6, 6),
-		Size = UDim2.fromOffset(720, 400),
+		Size = UDim2.fromOffset(500, 400),
 		IconSize = UDim2.fromOffset(90, 20),
 
 		AutoShow = true,
